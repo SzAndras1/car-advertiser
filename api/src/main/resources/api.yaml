@@ -36,7 +36,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdvertisementDto'
+    delete:
+      tags:
+        - caradvertiser
+      operationId: deleteAd
+      description: Delete Advertisement corresponding to the given id. Only the Advertisement owner can delete the Advertisement.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Id of the Advertisement
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Get back a deleted Advertisement view (Dto)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvertisementDto'
 
+  /api/v1/ad:
+    post:
+      tags:
+        - caradvertiser
+      operationId: createAd
+      description: Create an Advertisement
+      requestBody:
+        required: true
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/AdvertisementDto'
+      responses:
+        200:
+          description: RegisterResponse which contains the id of the created Advertisement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdRegisterResponseDto'
 
 # ==============================================================================
 # Authentication
