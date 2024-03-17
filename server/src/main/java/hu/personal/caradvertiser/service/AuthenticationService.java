@@ -30,6 +30,9 @@ public class AuthenticationService {
 
     public UserDto signup(UserDto userDto) {
         userDto.setUsername(userDto.getUsername().toLowerCase());
+        if (!userDto.getEmail().matches("^(.+)@(\\S+)$")) {
+            throw new IllegalArgumentException("Wrong email format.");
+        }
         userRepository.findByUsername(userDto.getUsername())
                 .ifPresent(e -> {
                     throw new EntityExistsException();

@@ -3,6 +3,8 @@ package hu.personal.caradvertiser.controller;
 import hu.personal.caradvertiser.CaradvertiserApi;
 import hu.personal.caradvertiser.model.AdRegisterResponseDto;
 import hu.personal.caradvertiser.model.AdvertisementDto;
+import hu.personal.caradvertiser.model.FilterDto;
+import hu.personal.caradvertiser.model.FilterResultDto;
 import hu.personal.caradvertiser.service.AdvertisementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +40,10 @@ public class AdvertisementController implements CaradvertiserApi {
     @Override
     public ResponseEntity<AdvertisementDto> deleteAd(Long id) {
         return ResponseEntity.ok(advertisementService.deleteAd(id));
+    }
+
+    @Override
+    public ResponseEntity<FilterResultDto> search(FilterDto filterDto) {
+        return ResponseEntity.ok(advertisementService.search(filterDto));
     }
 }
