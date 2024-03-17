@@ -35,7 +35,7 @@ public class AuthenticationService {
         }
         userRepository.findByUsername(userDto.getUsername())
                 .ifPresent(e -> {
-                    throw new EntityExistsException();
+                    throw new EntityExistsException("username");
                 });
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userMapper.toEntity(userDto);

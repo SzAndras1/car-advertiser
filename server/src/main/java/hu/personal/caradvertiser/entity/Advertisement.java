@@ -17,6 +17,8 @@ public class Advertisement {
     @SequenceGenerator(name = "SEQ_ADVERTISEMENT_TABLE", sequenceName = "SEQ_ADVERTISEMENT_TABLE", allocationSize = 1, initialValue = 15)
     private Long id;
 
+    private String username;
+
     private String brand;
 
     private String type;
