@@ -12,6 +12,9 @@
             <column name="id" type="bigint" defaultValueComputed="nextval('SEQ_ADVERTISEMENT_TABLE')">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="username" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
             <column name="brand" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
@@ -25,5 +28,16 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="user_foreign_key" author="andras.szabo">
+        <addForeignKeyConstraint
+                baseTableName="advertisement"
+                baseColumnNames="username"
+                constraintName="fk_advertisement_usertable"
+                referencedTableName="usertable"
+                referencedColumnNames="username"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

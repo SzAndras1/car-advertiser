@@ -17,7 +17,9 @@ public class Advertisement {
     @SequenceGenerator(name = "SEQ_ADVERTISEMENT_TABLE", sequenceName = "SEQ_ADVERTISEMENT_TABLE", allocationSize = 1, initialValue = 15)
     private Long id;
 
-    private String username;
+    @ManyToOne
+    @JoinColumn(name = "username", nullable = false)
+    private User user;
 
     private String brand;
 
