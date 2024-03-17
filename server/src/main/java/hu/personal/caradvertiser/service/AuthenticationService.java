@@ -46,9 +46,10 @@ public class AuthenticationService {
         ));
         User searchForUser = userRepository.findByUsername(loginDto.getUsername())
                 .orElseThrow(EntityNotFoundException::new);
-        String jwtToken = jwtService.generateToken(searchForUser);
+        String accessToken = jwtService.generateToken(searchForUser, "access");
+        String refreshToken = jwtService.generateToken(searchForUser, "refresh");
         return new AuthenticationResponseDto()
-                .accessToken(jwtToken)
-                .refreshToken("test");
+                .accessToken(accessToken)
+                .refreshToken(refreshToken);
     }
 }
