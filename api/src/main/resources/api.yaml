@@ -236,6 +236,9 @@ components:
         page:
           type: integer
           format: int32
+        pageSize:
+          type: integer
+          format: int32
         brand:
           type: string
           maxLength: 20

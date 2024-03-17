@@ -26,7 +26,7 @@ public class AdvertisementSearchService {
     @Transactional
     public FilterResultDto search(FilterDto filterDto) {
         int page = Objects.isNull(filterDto.getPage()) ? 0 : filterDto.getPage();
-        int pageSize = 10;
+        int pageSize = Objects.isNull(filterDto.getPageSize()) ? 10 : filterDto.getPageSize();
         Page<Advertisement> ads = advertisementRepository.search(
                 filterDto.getBrand(),
                 filterDto.getType(),
