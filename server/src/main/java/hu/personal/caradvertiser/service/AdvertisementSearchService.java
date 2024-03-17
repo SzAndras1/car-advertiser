@@ -26,18 +26,19 @@ public class AdvertisementSearchService {
     @Transactional
     public FilterResultDto search(FilterDto filterDto) {
         int page = Objects.isNull(filterDto.getPage()) ? 0 : filterDto.getPage();
+        int pageSize = 10;
         Page<Advertisement> ads = advertisementRepository.search(
                 filterDto.getBrand(),
                 filterDto.getType(),
                 filterDto.getPrice(),
-                PageRequest.of(page, 10)
+                PageRequest.of(page, pageSize)
         );
         List<AdvertisementDto> advertisementDtoList = ads.get()
                 .map(advertisementMapper::toDto)
                 .collect(Collectors.toList());
         return new FilterResultDto()
                 .page(page)
-                .pageSize(10)
+                .pageSize(pageSize)
                 .ads(advertisementDtoList)
                 .totalElements(ads.getTotalElements());
     }

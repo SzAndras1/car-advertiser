@@ -35,7 +35,7 @@ public class AuthenticationService {
         }
         userRepository.findByUsername(userDto.getUsername())
                 .ifPresent(e -> {
-                    throw new EntityExistsException("username");
+                    throw new EntityExistsException("The username already exists.");
                 });
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User user = userMapper.toEntity(userDto);
@@ -48,7 +48,7 @@ public class AuthenticationService {
                 loginDto.getPassword()
         ));
         User searchForUser = userRepository.findByUsername(loginDto.getUsername())
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new EntityNotFoundException("This username does not exist."));
         String accessToken = jwtService.generateToken(searchForUser, "access");
         String refreshToken = jwtService.generateToken(searchForUser, "refresh");
         return new AuthenticationResponseDto()

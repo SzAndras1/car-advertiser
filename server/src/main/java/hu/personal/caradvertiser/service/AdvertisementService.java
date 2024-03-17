@@ -25,7 +25,7 @@ public class AdvertisementService {
 
     public AdvertisementDto getAd(Long id) {
         return advertisementMapper.toDto(advertisementRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new));
+                .orElseThrow(() -> new EntityNotFoundException("There is no item with this id.")));
     }
 
     public AdRegisterResponseDto createAd(AdvertisementDto advertisementDto) {
@@ -37,11 +37,12 @@ public class AdvertisementService {
     }
 
     public AdvertisementDto deleteAd(Long id) {
-        Advertisement advertisement = advertisementRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        Advertisement advertisement = advertisementRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("There is no item with this id."));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
         if (!currentUsername.equals(advertisement.getUsername())) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("You cannot delete another User's Advertisement.");
         }
         advertisementRepository.delete(advertisement);
         return advertisementMapper.toDto(advertisement);
