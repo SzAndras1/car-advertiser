@@ -12,7 +12,7 @@
             <column name="id" type="bigint" defaultValueComputed="nextval('SEQ_ADVERTISEMENT_TABLE')">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="username" type="varchar(25)">
+            <column name="userid" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="brand" type="varchar(100)">
@@ -33,10 +33,10 @@
     <changeSet id="user_foreign_key" author="andras.szabo">
         <addForeignKeyConstraint
                 baseTableName="advertisement"
-                baseColumnNames="username"
+                baseColumnNames="userid"
                 constraintName="fk_advertisement_usertable"
                 referencedTableName="usertable"
-                referencedColumnNames="username"
+                referencedColumnNames="id"
                 onDelete="CASCADE"
                 onUpdate="CASCADE"/>
     </changeSet>

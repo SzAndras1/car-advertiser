@@ -43,6 +43,7 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponseDto login(LoginDto loginDto) {
+        loginDto.setUsername(loginDto.getUsername().toLowerCase());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsername(),
                 loginDto.getPassword()
