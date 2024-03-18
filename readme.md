@@ -18,14 +18,12 @@ java -jar ./server/target/caradvertiser-server-0.0.1-SNAPSHOT.jar
 mvn spring-boot:run
 ```
 
-
-
 ## What I used for the program
 - Spring Boot, Lombok, Mapstruct, H2 database, Openapi generator, Spring Security, Liquibase, JUnit, Mockito, Hamcrest
 
 ## Test scenarios
 
-### Signup
+### Signup (Success)
 ```bash
 curl --location 'http://localhost:8081/api/v1/auth/signup' \
 --header 'Content-Type: application/json' \
@@ -35,7 +33,19 @@ curl --location 'http://localhost:8081/api/v1/auth/signup' \
     "password": "dummyPassword6"
 }'
 ```
-### Login
+
+### Signup (Fail: username already exists)
+```bash
+curl --location 'http://localhost:8081/api/v1/auth/signup' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "testUser1",
+    "email": "test1@email.com",
+    "password": "testPassword1"
+}'
+```
+
+### Login (Success)
 ```bash
 curl --location 'http://localhost:8081/api/v1/auth/login' \
 --header 'Content-Type: application/json' \
@@ -46,7 +56,6 @@ curl --location 'http://localhost:8081/api/v1/auth/login' \
 ```
 
 ### Create Advertisement (Success)
-
 ```bash
 curl --location 'http://localhost:8081/api/v1/ad' \
 --header 'Content-Type: application/json' \
@@ -59,7 +68,7 @@ curl --location 'http://localhost:8081/api/v1/ad' \
 }'
 ```
 
-### Create Advertisement (Fail)
+### Create Advertisement (Fail: brand is not valid)
 ```bash
 curl --location 'http://localhost:8081/api/v1/ad' \
 --header 'Content-Type: application/json' \
@@ -69,6 +78,42 @@ curl --location 'http://localhost:8081/api/v1/ad' \
     "type": "Coupe",
     "description": "A sporty coupe designed for enthusiasts seeking performance and style.",
     "price": 30000
+}'
+```
+
+### Delete Advertisement (Success)
+```bash
+curl --location --request DELETE 'http://localhost:8081/api/v1/ad/15' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjYiLCJpYXQiOjE3MTA3NjEzNTIsImV4cCI6MTcxMDc2NDk1Mn0.hc14SD6EtsepL-WXwtw42-5-P8eyliJe66nwHFug2f4'
+```
+
+### Delete Advertisement (Fail: Other User's Advertisement)
+```bash
+curl --location --request DELETE 'http://localhost:8081/api/v1/ad/2' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjYiLCJpYXQiOjE3MTA3NjEzNTIsImV4cCI6MTcxMDc2NDk1Mn0.hc14SD6EtsepL-WXwtw42-5-P8eyliJe66nwHFug2f4'
+```
+
+### Get Advertisement (Success)
+```bash
+curl --location 'http://localhost:8081/api/v1/ad/3' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjYiLCJpYXQiOjE3MTA3NjEzNTIsImV4cCI6MTcxMDc2NDk1Mn0.hc14SD6EtsepL-WXwtw42-5-P8eyliJe66nwHFug2f4'
+```
+
+### Get Advertisement (Fail: Entity not found)
+```bash
+curl --location 'http://localhost:8081/api/v1/ad/100' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjYiLCJpYXQiOjE3MTA3NjEzNTIsImV4cCI6MTcxMDc2NDk1Mn0.hc14SD6EtsepL-WXwtw42-5-P8eyliJe66nwHFug2f4'
+```
+
+### Search (Success)
+```bash
+curl --location --request GET 'http://localhost:8081/api/v1/ad/search' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjYiLCJpYXQiOjE3MTA3NjEzNTIsImV4cCI6MTcxMDc2NDk1Mn0.hc14SD6EtsepL-WXwtw42-5-P8eyliJe66nwHFug2f4' \
+--data '{
+    "brand": "Honda",
+    "page": 0,
+    "pageSize": 10
 }'
 ```
 
