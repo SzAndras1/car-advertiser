@@ -67,7 +67,7 @@ public class AuthenticationService {
         if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
             wrongFields.add("password");
         }
-        if (email.matches("^(.+)@(\\S+)$")) {
+        if (!email.matches("^(.+)@(\\S+)$")) {
             wrongFields.add("email");
         }
         if (wrongFields.size() > 0) {
