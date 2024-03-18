@@ -157,20 +157,13 @@ components:
             The technical id
         brand:
           type: string
-          maxLength: 20
-          minLength: 2
         type:
           type: string
-          maxLength: 20
-          minLength: 2
         description:
           type: string
-          maxLength: 200
-          minLength: 2
         price:
           type: integer
           format: int64
-          maximum: 9999999999
 
     AdRegisterResponseDto:
       required:
@@ -195,14 +188,11 @@ components:
             The technical id
         username:
           type: string
-          maxLength: 50
-          minLength: 2
         email:
           type: string
           format: email
         password:
           type: string
-          minLength: 8
 
     LoginDto:
       required:
@@ -211,11 +201,8 @@ components:
       properties:
         username:
           type: string
-          maxLength: 50
-          minLength: 2
         password:
           type: string
-          minLength: 8
 
     AuthenticationResponseDto:
       required:
@@ -237,16 +224,11 @@ components:
           format: int32
         brand:
           type: string
-          maxLength: 20
-          minLength: 2
         type:
           type: string
-          maxLength: 20
-          minLength: 2
         price:
           type: integer
           format: int64
-          maximum: 9999999999
 
     FilterResultDto:
       properties:
@@ -263,5 +245,12 @@ components:
         totalElements:
           type: integer
           format: int64
+
+    ErrorDto:
+      properties:
+        wrongField:
+          type: string
+        message:
+          type: string
 
 
