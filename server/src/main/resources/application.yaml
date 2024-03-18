@@ -15,7 +15,7 @@ spring:
     init:
       mode: always
   liquibase:
-    change-log: classpath:/db/changeLog/db.changelog-master.xml
+    change-log: classpath:/db/changelog/db.changelog-master.xml
     enabled: true
     drop-first: true
   h2:

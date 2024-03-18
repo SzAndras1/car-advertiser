@@ -1,0 +1,12 @@
+services:
+
+  caradvertiser-service:
+    build: ./server
+    container_name: caradvertiser-service
+    ports:
+      - '8081:8081'
+    volumes:
+      - tmp:/tmp
+
+volumes:
+  tmp:
