@@ -1,8 +1,8 @@
-INSERT INTO usertable (id, username, email, password) VALUES (1, 'testUser1', 'test1@email.com', '$2a$10$wDNuIObqGPH2Dm.50yfJleNFejXv7Gj.d3kXjn5FMGB1/NroVWARi')
-INSERT INTO usertable (id, username, email, password) VALUES (2, 'testUser2', 'test2@email.com', '$2a$10$t6oXqV6iXLePs.sBru/itOzEVhIA7v168ppD3yKRqwYEDXQKxI0uq')
-INSERT INTO usertable (id, username, email, password) VALUES (3, 'testUser3', 'test3@email.com', '$2a$10$Pe1ALNoHunbcFQ1Gz2b4r.tPtlPUTl8HHisR02gDJma0Nrw0tile6')
-INSERT INTO usertable (id, username, email, password) VALUES (4, 'testUser4', 'test4@email.com', '$2a$10$TdmbU61Nni5g7uuCWk1r2e//gknFMjAXVavT2exQH380QrVXPtcVG')
-INSERT INTO usertable (id, username, email, password) VALUES (5, 'testUser5', 'test5@email.com', '$2a$10$sXE3ttjfIi15Gpt5GOMCWu9CNzKjxXPjwfJs4gzsQK7DCa8akCBRq')
+INSERT INTO usertable (id, username, email, password) VALUES (1, 'testuser1', 'test1@email.com', '$2a$10$wDNuIObqGPH2Dm.50yfJleNFejXv7Gj.d3kXjn5FMGB1/NroVWARi')
+INSERT INTO usertable (id, username, email, password) VALUES (2, 'testuser2', 'test2@email.com', '$2a$10$t6oXqV6iXLePs.sBru/itOzEVhIA7v168ppD3yKRqwYEDXQKxI0uq')
+INSERT INTO usertable (id, username, email, password) VALUES (3, 'testuser3', 'test3@email.com', '$2a$10$Pe1ALNoHunbcFQ1Gz2b4r.tPtlPUTl8HHisR02gDJma0Nrw0tile6')
+INSERT INTO usertable (id, username, email, password) VALUES (4, 'testuser4', 'test4@email.com', '$2a$10$TdmbU61Nni5g7uuCWk1r2e//gknFMjAXVavT2exQH380QrVXPtcVG')
+INSERT INTO usertable (id, username, email, password) VALUES (5, 'testuser5', 'test5@email.com', '$2a$10$sXE3ttjfIi15Gpt5GOMCWu9CNzKjxXPjwfJs4gzsQK7DCa8akCBRq')
 
 INSERT INTO advertisement (id, username, brand, type, description, price) VALUES (1, 1, 'Toyota', 'SUV', 'A spacious and reliable SUV for family adventures.', 35000)
 INSERT INTO advertisement (id, username, brand, type, description, price) VALUES (2, 3, 'Toyota', 'Sedan', 'A sleek and fuel-efficient sedan for city driving.', 25000)

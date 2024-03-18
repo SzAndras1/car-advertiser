@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler({NotValidException.class, OtherUserEntityException.class})
-    public ResponseEntity<ErrorDto> handleNotValidAndOtherUserEntityException(NotValidException ex) {
+    public ResponseEntity<ErrorDto> handleNotValidAndOtherUserEntityException(BaseException ex) {
         ErrorDto errorDto = new ErrorDto()
                 .wrongField(ex.getField())
                 .message(ex.getMessage());
