@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hu.personal.caradvertiser.entity.Advertisement;
 import hu.personal.caradvertiser.entity.User;
 import hu.personal.caradvertiser.fixtures.AdvertisementFixtures;
+import hu.personal.caradvertiser.mapper.AdvertisementMapper;
 import hu.personal.caradvertiser.model.AdvertisementDto;
 import hu.personal.caradvertiser.repository.AdvertisementRepository;
 import hu.personal.caradvertiser.repository.UserRepository;
@@ -23,8 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -42,19 +42,19 @@ public class AdvertisementIntegrationTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AdvertisementMapper advertisementMapper;
+
     @WithMockUser(username = "testUser")
     @Test
-    void getAdShouldReturnWithTheCorrectResult() throws Exception {
+    void getShouldReturnWithTheCorrectResult() throws Exception {
         Long id = 15L;
         userRepository.save(new User(0L, "testUser", "testEmail", "testPassword"));
-        Advertisement savedAdvertisement = advertisementRepository.save(AdvertisementFixtures.simpleAdvertisement(id));
+        AdvertisementDto savedAdvertisement = advertisementMapper.toDto(advertisementRepository.save(AdvertisementFixtures.simpleAdvertisement(id)));
 
         mockMvc.perform(get("/api/v1/ad/{id}", savedAdvertisement.getId()))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.brand", is("testBrand")))
-                .andExpect(jsonPath("$.type", is("testType")))
-                .andExpect(jsonPath("$.description", is("testDescription")))
-                .andExpect(jsonPath("$.price", is(100)));
+                .andExpect(content().json(objectMapper.writeValueAsString(savedAdvertisement)));
     }
 
     @WithMockUser(username = "testUser")
