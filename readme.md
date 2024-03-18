@@ -1,5 +1,27 @@
+## Launching the Spring Boot Application
+
+First, you need to run a Maven clean install command. Then it is possible to run the application using Docker, an IDE or even console commands. These options allow you to launch the application in different ways depending on the development environment.
+
+```bash
+mvn clean install 
+```
+
+### 1. Docker
+```bash
+docker-compose -f ./docker-compose.yaml up
+```
+
+### 2. Console command
+```bash
+java -jar ./server/target/caradvertiser-server-0.0.1-SNAPSHOT.jar
+# or 
+mvn spring-boot:run
+```
+
+
+
 ## What I used for the program
-- Spring Boot, Lombok, Mapstruct, H2 database, Openapi generator, Spring Security, Liquibase
+- Spring Boot, Lombok, Mapstruct, H2 database, Openapi generator, Spring Security, Liquibase, JUnit, Mockito, Hamcrest
 
 ## Test scenarios
 
