@@ -59,14 +59,15 @@ public class AuthenticationService {
     private void validateUser(UserDto userDto) {
         String username = userDto.getUsername();
         String password = userDto.getPassword();
+        String email = userDto.getEmail();
         List<String> wrongFields = new LinkedList<>();
         if (username.length() < 3 || username.length() > 50) {
             wrongFields.add("username");
         }
-        if (password.length() < 8) {
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
             wrongFields.add("password");
         }
-        if (!userDto.getEmail().matches("^(.+)@(\\S+)$")) {
+        if (email.matches("^(.+)@(\\S+)$")) {
             wrongFields.add("email");
         }
         if (wrongFields.size() > 0) {
